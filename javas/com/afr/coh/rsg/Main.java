@@ -30,7 +30,7 @@ public class Main {
 					String[] parts = sCurrentLine.split(",");
 					
 					Unit unit = new Unit(parts[0].trim(), Integer.valueOf(
-							parts[1].trim()).intValue(), parts[2].trim());
+							parts[1].trim()).intValue(), parts[2].trim(),Integer.parseInt(parts[3].trim()));
 					this.masterList.add(unit);
 					this.units.add(unit);
 //				}
@@ -58,10 +58,7 @@ public class Main {
 	
 	
 
-	public static void main(String[] args) {
-		
-		
-	}
+
 	
 	public static int randInt(int min, int max) {
 
@@ -97,15 +94,18 @@ public class Main {
 					unidade = getUnitname(nationality,	"Rifles");
 				}
 				
-				pointCount += unidade.getPoints();
-				Integer count = (Integer) randomUnits.get(unidade.getName());
-				if (count != null) {
-					count = Integer.valueOf(count.intValue() + 1);
-				} else {
-					count = Integer.valueOf(1);
+				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
+				
+					pointCount += unidade.getPoints();
+					Integer count = (Integer) randomUnits.get(unidade.getName());
+					if (count != null) {
+						count = Integer.valueOf(count.intValue() + 1);
+					} else {
+						count = Integer.valueOf(1);
+					}
+					Integer countI = Integer.valueOf(count.intValue());
+					randomUnits.put(unidade.getName(), countI);
 				}
-				Integer countI = Integer.valueOf(count.intValue());
-				randomUnits.put(unidade.getName(), countI);
 				
 			}
 			
@@ -113,7 +113,7 @@ public class Main {
 				
 				int random  = randInt(1, 3);
 				Unit unidade = unidade = 	getUnitname(nationality,"MMG Maxim");
-				
+				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){	
 				pointCount += unidade.getPoints();
 				Integer count = (Integer) randomUnits.get(unidade.getName());
 				if (count != null) {
@@ -123,7 +123,7 @@ public class Main {
 				}
 				Integer countI = Integer.valueOf(count.intValue());
 				randomUnits.put(unidade.getName(), countI);
-				
+				}	
 			}
 			
 			
@@ -135,38 +135,44 @@ public class Main {
 			for (int i = 0; i < inf; i++) {
 				int random  = randInt(1, 3);
 				Unit unidade = unidade = 	getUnitname(nationality,"Rifles");
+				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
+					
 				
-				pointCount += unidade.getPoints();
-				Integer count = (Integer) randomUnits.get(unidade.getName());
-				if (count != null) {
-					count = Integer.valueOf(count.intValue() + 1);
-				} else {
-					count = Integer.valueOf(1);
+					pointCount += unidade.getPoints();
+					Integer count = (Integer) randomUnits.get(unidade.getName());
+					if (count != null) {
+						count = Integer.valueOf(count.intValue() + 1);
+					} else {
+						count = Integer.valueOf(1);
+					}
+					Integer countI = Integer.valueOf(count.intValue());
+					randomUnits.put(unidade.getName(), countI);
 				}
-				Integer countI = Integer.valueOf(count.intValue());
-				randomUnits.put(unidade.getName(), countI);
-				
 			}
 			
 			for (int i = 0; i < mg; i++) {
 				
 				int random  = randInt(1, 2);
 				Unit unidade = new Unit();
+				
+				
 				if(random==1){
 					unidade = 	getUnitname(nationality,"LMG 34");
 				}if(random==2){
 					unidade = getUnitname(nationality,	"HMG 34");
 				}
+				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
 				
-				pointCount += unidade.getPoints();
-				Integer count = (Integer) randomUnits.get(unidade.getName());
-				if (count != null) {
-					count = Integer.valueOf(count.intValue() + 1);
-				} else {
-					count = Integer.valueOf(1);
+					pointCount += unidade.getPoints();
+					Integer count = (Integer) randomUnits.get(unidade.getName());
+					if (count != null) {
+						count = Integer.valueOf(count.intValue() + 1);
+					} else {
+						count = Integer.valueOf(1);
+					}
+					Integer countI = Integer.valueOf(count.intValue());
+					randomUnits.put(unidade.getName(), countI);
 				}
-				Integer countI = Integer.valueOf(count.intValue());
-				randomUnits.put(unidade.getName(), countI);
 			}
 			
 		}
@@ -180,7 +186,7 @@ public class Main {
 			
 			int auxpoints = pointCount +  randomUnit.getPoints();
 			;
-			if (auxpoints <= pointsMax) {
+			if (auxpoints <= pointsMax && (randomUnits.get(randomUnit.getName())==null?0:randomUnits.get(randomUnit.getName()))<randomUnit.getAvailable() ){
 				pointCount += randomUnit.getPoints();
 				Integer count = (Integer) randomUnits.get(randomUnit.getName());
 				if (count != null) {
