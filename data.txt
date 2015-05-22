@@ -4,7 +4,7 @@ NKVD,     				    18, Russia ATB, 3
 SMG/Rifles,     		    20, Russia ATB, 4
 INF 76MM,                   24, Russia ATB, 1
 AT Gun 45mm,    		    26, Russia ATB, 2
-AT Gun 76 f22 ,             29, Russia ATB, 1
+AT Gun 76 f22,             29, Russia ATB, 1
 5cm Mortar,                 24, Russia ATB, 2
 82mm Mortar,                32, Russia ATB, 2
 OT-26,                      27, Russia ATB, 1
@@ -17,7 +17,7 @@ Heavy Tank KV1a,           94, Russia ATB, 2
 Med Tank T-34a,            81, Russia ATB, 4
 Med Tank T-34b,            86, Russia ATB, 2
 Zis 30 mobile art,         36, Russia ATB, 1
-T -38 					   24, Russia ATB, 2
+T -38, 					   24, Russia ATB, 2
 BA-6,            		   35, Russia ATB, 2
 Tank BT-5,           	   44, Russia ATB, 3
 T-28A,         			   38, Russia ATB, 2

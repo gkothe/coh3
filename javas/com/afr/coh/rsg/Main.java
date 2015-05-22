@@ -1,9 +1,12 @@
 package com.afr.coh.rsg;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +21,9 @@ public class Main {
 		this.masterList.clear();
 		BufferedReader br = null;
 		try {
-			InputStream is = Main.class.getResourceAsStream("//data.txt");
+			URL u = getClass().getProtectionDomain().getCodeSource().getLocation();
+		    File f = new File(u.toURI());
+			InputStream is = new FileInputStream(f.getParent()+"/data.txt"); 
 			InputStreamReader isr = new InputStreamReader(is);
 			br = new BufferedReader(isr);
 			int numberAvailable = 10;
@@ -35,7 +40,7 @@ public class Main {
 					this.units.add(unit);
 //				}
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			try {
 				if (br != null) {
