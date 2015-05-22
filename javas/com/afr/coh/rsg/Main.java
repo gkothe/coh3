@@ -18,7 +18,7 @@ public class Main {
 		this.masterList.clear();
 		BufferedReader br = null;
 		try {
-			InputStream is = Main.class.getResourceAsStream("/data.txt");
+			InputStream is = Main.class.getResourceAsStream("//data.txt");
 			InputStreamReader isr = new InputStreamReader(is);
 			br = new BufferedReader(isr);
 			int numberAvailable = 10;
@@ -133,8 +133,22 @@ public class Main {
 			inf = inf - mg;
 			
 			for (int i = 0; i < inf; i++) {
+				
 				int random  = randInt(1, 3);
-				Unit unidade = unidade = 	getUnitname(nationality,"Rifles");
+				Unit unidade = new Unit();
+				
+				
+				if(random==1){
+					unidade = 	getUnitname(nationality,"Rifles");
+				}
+				if(random==2){
+					unidade = getUnitname(nationality,	"Rifles+mg");
+				}
+				if(random==3){
+					unidade = getUnitname(nationality,	"Tank Hunter");
+				}
+				
+				
 				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
 					
 				
@@ -152,15 +166,23 @@ public class Main {
 			
 			for (int i = 0; i < mg; i++) {
 				
-				int random  = randInt(1, 2);
+				int random  = randInt(1, 3);
 				Unit unidade = new Unit();
 				
 				
 				if(random==1){
-					unidade = 	getUnitname(nationality,"LMG 34");
-				}if(random==2){
+					unidade = 	getUnitname(nationality,"LMG 34-drum");
+				}
+				if(random==2){
 					unidade = getUnitname(nationality,	"HMG 34");
 				}
+				if(random==3){
+					unidade = getUnitname(nationality,	"LMG 34-belt");
+				}
+				
+			
+				
+				
 				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
 				
 					pointCount += unidade.getPoints();
