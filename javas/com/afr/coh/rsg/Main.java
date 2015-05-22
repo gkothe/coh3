@@ -85,9 +85,61 @@ public class Main {
 	}	
 	
 	public HashMap<String, Integer> getRandomUnits(String nationality,
-			int pointsMax, boolean defender) {
+			int pointsMax, boolean isdefender) {
 		int pointCount = 0;
 		HashMap<String, Integer> randomUnits = new HashMap();
+		
+		if(isdefender){
+			int perc = (pointsMax * 15)/100;
+			
+	
+				
+			while(	pointCount < perc) {
+				
+				int random  = randInt(1, 5);
+				Unit unidade = new Unit();
+				if(random==1){
+					unidade = 	getUnitname("Defense","Trenches");
+				}if(random==2){
+					unidade = getUnitname("Defense",	"Bunkers");
+				}if(random==3){
+					unidade = getUnitname("Defense",	"Barbed wire");
+				}if(random==4){
+					unidade = getUnitname("Defense",	"Road blocks");
+				}if(random==5){
+					unidade = getUnitname("Defense",	"Land mines");
+				}
+				
+				if (unidade == null) {
+					break;
+				}
+				
+				
+				int auxpoints = pointCount +  unidade.getPoints();
+				;
+				if (auxpoints <= pointsMax && (randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
+					pointCount += unidade.getPoints();
+					Integer count = (Integer) randomUnits.get(unidade.getName());
+					if (count != null) {
+						count = Integer.valueOf(count.intValue() + 1);
+					} else {
+						count = Integer.valueOf(1);
+					}
+					Integer countI = Integer.valueOf(count.intValue());
+					randomUnits.put(unidade.getName(), countI);
+					
+				}else{
+					removeUnit(unidade);
+				}
+			
+			
+			}
+			
+			
+			
+		}
+		
+		
 		
 		if(nationality.equalsIgnoreCase("Russia ATB")){//rifles and mgs fixed
 			int inf = (pointsMax/65);
