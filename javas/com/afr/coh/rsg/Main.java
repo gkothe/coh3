@@ -85,7 +85,7 @@ public class Main {
 	}	
 	
 	public HashMap<String, Integer> getRandomUnits(String nationality,
-			int pointsMax, boolean isdefender, boolean softtargets) {
+			int pointsMax, boolean isdefender, boolean softtargets, boolean weakerdefender) {
 		int pointCount = 0;
 		HashMap<String, Integer> randomUnits = new HashMap();
 	
@@ -93,6 +93,11 @@ public class Main {
 			int perc = (pointsMax * 15)/100;
 			int range = softtargets == true?4:5;
 				
+			if(weakerdefender){
+				int weakness_point = (pointsMax * 15)/100;
+				pointsMax = pointsMax - weakness_point;
+			}
+			
 			while(	pointCount < perc) {
 				
 				

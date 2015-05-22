@@ -84,7 +84,6 @@ public class MainFrame
     boolean polandPoh = false;
     boolean randomdefense = false;
     boolean weakerdefense = false;
-    boolean softtargets = false;
     
     int pointsMax = Integer.valueOf(this.pointsTextField.getText()).intValue();
     if (this.chckbxRussiaAtb.isSelected()) {
@@ -112,6 +111,12 @@ public class MainFrame
     if (this.chckbxRandomDefender.isSelected()) {
     	randomdefense = true;
       }
+    
+    if (this.chckbxWeakerDefender.isSelected()) {
+    	weakerdefense = true;
+      }
+    
+    
  
     
     boolean defenderrussia =false; 
@@ -127,7 +132,7 @@ public class MainFrame
     if (russiaAtb)
     {
     	
-    	HashMap<String, Integer> unitsRussiaAtb = this.main.getRandomUnits("Russia ATB", pointsMax,defenderrussia,this.chckbxSoftTargets.isSelected());
+    	HashMap<String, Integer> unitsRussiaAtb = this.main.getRandomUnits("Russia ATB", pointsMax,defenderrussia,this.chckbxSoftTargets.isSelected(),weakerdefense);
       
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Russia ATB:");
       for (String name : unitsRussiaAtb.keySet()) {
@@ -137,7 +142,7 @@ public class MainFrame
     }
     if (germanyAtb)
     {
-      HashMap<String, Integer> unitsGermanyAtb = this.main.getRandomUnits("Germany ATB", pointsMax,defendergermany,this.chckbxSoftTargets.isSelected());
+      HashMap<String, Integer> unitsGermanyAtb = this.main.getRandomUnits("Germany ATB", pointsMax,defendergermany,this.chckbxSoftTargets.isSelected(),weakerdefense);
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Germany ATB:");
       for (String name : unitsGermanyAtb.keySet()) {
         this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n" + "(x" + unitsGermanyAtb.get(name) + ") " + name);
@@ -279,11 +284,14 @@ public class MainFrame
     this.progressBar = new JProgressBar();
     
     chckbxRandomDefender = new JCheckBox("Random Defender");
+    chckbxRandomDefender.setToolTipText("One team will be assigned with defensive stuffs(bunker,mines e etc) using up to 15% of its maximum points");
     
     
     chckbxWeakerDefender = new JCheckBox("Weaker Defender");
+    chckbxWeakerDefender.setToolTipText("The defender will lose 15% of its maximum points ");
     
     chckbxSoftTargets = new JCheckBox("Soft Targets");
+    chckbxSoftTargets.setToolTipText("Only units with red defense");
     GroupLayout gl_generatorPanel = new GroupLayout(generatorPanel);
     gl_generatorPanel.setHorizontalGroup(
     	gl_generatorPanel.createParallelGroup(Alignment.LEADING)
