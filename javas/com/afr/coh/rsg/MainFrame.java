@@ -440,6 +440,21 @@ public class MainFrame
       tableModel.setValueAt(Integer.valueOf(unit.getPoints()), rowCount, 1);
       rowCount++;
     }
+    
+    
+    List defense = this.main.getMasterList("Defense");
+    rowCount++;
+    tableModel.setValueAt("<html><b>Defense</b></html>", rowCount, 0);
+    rowCount++;
+    for (int i = 0; i < defense.size(); i++) 
+    {
+    	Unit	unit  = (Unit)defense.get(i);
+      tableModel.setValueAt(unit.getName(), rowCount, 0);
+      tableModel.setValueAt(Integer.valueOf(unit.getPoints()), rowCount, 1);
+      rowCount++;
+    }
+    
+    
     pointCostPanel.setLayout(new BoxLayout(pointCostPanel, 0));
     
     this.scrollPane = new JScrollPane();

@@ -76,7 +76,7 @@ Wz34,            38, Poland POH, 2
 Wz36 AA gun,     27, Poland POH, 1
 Wz36 AT Gun,     25, Poland POH, 2
 Trenches,     	4, Defense, 5
-bunkers,     	10,Defense, 2
-barbed wire,    2, Defense, 8
-road bloks,     2, Defense, 5
-land mines,     4, Defense, 5
+Bunkers,     	10,Defense, 2
+Barbed wire,    2, Defense, 8
+Road blocks,     2, Defense, 5
+Land mines,     4, Defense, 5

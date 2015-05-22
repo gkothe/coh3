@@ -33,7 +33,6 @@ public class Main {
 			InputStream is = new FileInputStream(f.getParent()+data); 
 			InputStreamReader isr = new InputStreamReader(is);
 			br = new BufferedReader(isr);
-			int numberAvailable = 10;
 			String sCurrentLine;
 //			for (int x = 1; x < numberAvailable; x++) {
 
