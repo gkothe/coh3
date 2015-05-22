@@ -88,7 +88,7 @@ public class Main {
 			int pointsMax, boolean isdefender, boolean softtargets) {
 		int pointCount = 0;
 		HashMap<String, Integer> randomUnits = new HashMap();
-		
+	
 		if(isdefender){
 			int perc = (pointsMax * 15)/100;
 			int range = softtargets == true?4:5;
@@ -173,6 +173,10 @@ public class Main {
 					inf++;
 				}
 				
+				if(inf>50){//preguiça de fazer algo correto
+					inf = 50;
+				} 
+				
 			}
 			
 			for (int i = 0; i < mg; i++) {
@@ -192,6 +196,9 @@ public class Main {
 					mg++;
 				}
 				
+				if(mg>50){
+					mg = 50;
+				}
 			}
 			
 			
@@ -231,6 +238,10 @@ public class Main {
 					inf++;
 				}
 				
+				if(inf>50){
+					inf = 50;
+				}
+				
 			}
 			
 			for (int i = 0; i < mg; i++) {
@@ -265,6 +276,10 @@ public class Main {
 					randomUnits.put(unidade.getName(), countI);
 				}	else{
 					mg++;
+				}
+				
+				if(mg>50){
+					mg = 50;
 				}
 				
 			}
