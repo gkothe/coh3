@@ -127,7 +127,7 @@ public class MainFrame
     if (russiaAtb)
     {
     	
-    	HashMap<String, Integer> unitsRussiaAtb = this.main.getRandomUnits("Russia ATB", pointsMax,defenderrussia);
+    	HashMap<String, Integer> unitsRussiaAtb = this.main.getRandomUnits("Russia ATB", pointsMax,defenderrussia,this.chckbxSoftTargets.isSelected());
       
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Russia ATB:");
       for (String name : unitsRussiaAtb.keySet()) {
@@ -137,7 +137,7 @@ public class MainFrame
     }
     if (germanyAtb)
     {
-      HashMap<String, Integer> unitsGermanyAtb = this.main.getRandomUnits("Germany ATB", pointsMax,defendergermany);
+      HashMap<String, Integer> unitsGermanyAtb = this.main.getRandomUnits("Germany ATB", pointsMax,defendergermany,this.chckbxSoftTargets.isSelected());
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Germany ATB:");
       for (String name : unitsGermanyAtb.keySet()) {
         this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n" + "(x" + unitsGermanyAtb.get(name) + ") " + name);

@@ -85,18 +85,19 @@ public class Main {
 	}	
 	
 	public HashMap<String, Integer> getRandomUnits(String nationality,
-			int pointsMax, boolean isdefender) {
+			int pointsMax, boolean isdefender, boolean softtargets) {
 		int pointCount = 0;
 		HashMap<String, Integer> randomUnits = new HashMap();
 		
 		if(isdefender){
 			int perc = (pointsMax * 15)/100;
-			
-	
+			int range = softtargets == true?4:5;
 				
 			while(	pointCount < perc) {
 				
-				int random  = randInt(1, 5);
+				
+				
+				int random  = randInt(1, range);
 				Unit unidade = new Unit();
 				if(random==1){
 					unidade = 	getUnitname("Defense","Trenches");
@@ -105,9 +106,9 @@ public class Main {
 				}if(random==3){
 					unidade = getUnitname("Defense",	"Barbed wire");
 				}if(random==4){
-					unidade = getUnitname("Defense",	"Road blocks");
-				}if(random==5){
 					unidade = getUnitname("Defense",	"Land mines");
+				}if(random==5){
+					unidade = getUnitname("Defense",	"Road blocks");
 				}
 				
 				if (unidade == null) {
