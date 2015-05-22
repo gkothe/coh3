@@ -84,7 +84,7 @@ public class Main {
 		HashMap<String, Integer> randomUnits = new HashMap();
 		
 		if(nationality.equalsIgnoreCase("Russia ATB")){//rifles and mgs fixed
-			int inf = (pointsMax/80);
+			int inf = (pointsMax/65);
 			int mg = inf/3;
 			inf = inf - mg;
 			
@@ -110,13 +110,14 @@ public class Main {
 					}
 					Integer countI = Integer.valueOf(count.intValue());
 					randomUnits.put(unidade.getName(), countI);
+				}else{
+					inf++;
 				}
 				
 			}
 			
 			for (int i = 0; i < mg; i++) {
 				
-				int random  = randInt(1, 3);
 				Unit unidade = unidade = 	getUnitname(nationality,"MMG Maxim");
 				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){	
 				pointCount += unidade.getPoints();
@@ -128,18 +129,21 @@ public class Main {
 				}
 				Integer countI = Integer.valueOf(count.intValue());
 				randomUnits.put(unidade.getName(), countI);
-				}	
+				}	else{
+					mg++;
+				}
+				
 			}
 			
 			
 		}else if(nationality.equalsIgnoreCase("Germany ATB")){//rifles and mgs fixed
-			int inf = (pointsMax/70);
+			int inf = (pointsMax/65);
 			int mg = inf/3;
 			inf = inf - mg;
 			
 			for (int i = 0; i < inf; i++) {
 				
-				int random  = randInt(1, 3);
+				int random  = randInt(1, 2);
 				Unit unidade = new Unit();
 				
 				
@@ -149,9 +153,7 @@ public class Main {
 				if(random==2){
 					unidade = getUnitname(nationality,	"Rifles+mg");
 				}
-				if(random==3){
-					unidade = getUnitname(nationality,	"Tank Hunter");
-				}
+				
 				
 				
 				if((randomUnits.get(unidade.getName())==null?0:randomUnits.get(unidade.getName()))<unidade.getAvailable() ){
@@ -166,7 +168,10 @@ public class Main {
 					}
 					Integer countI = Integer.valueOf(count.intValue());
 					randomUnits.put(unidade.getName(), countI);
+				}else{
+					inf++;
 				}
+				
 			}
 			
 			for (int i = 0; i < mg; i++) {
@@ -199,7 +204,10 @@ public class Main {
 					}
 					Integer countI = Integer.valueOf(count.intValue());
 					randomUnits.put(unidade.getName(), countI);
+				}	else{
+					mg++;
 				}
+				
 			}
 			
 		}
