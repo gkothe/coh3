@@ -1,39 +1,40 @@
-Rifles,                    12, Russia ATB, 12
-MMG Maxim,                 11, Russia ATB, 3
-NKVD,     				   15, Russia ATB, 3
-19-K AT Gun,    		   18, Russia ATB, 2
-SMG/Rifles,     		   18, Russia ATB, 4
-5cm Mortar,                27, Russia ATB, 2
-OT-26,                     30, Russia ATB, 1
-Armored Car BA-10,         38, Russia ATB, 2
-Light Tank BT-7,           38, Russia ATB, 2
-Light Tank T-26b,          35, Russia ATB, 4
-Tank T-35b,                40, Russia ATB, 4
-Tank Buster KV2a,          53, Russia ATB, 2
-82mm Mortar,               56, Russia ATB, 2
-INF 76MM,                  32, Russia ATB, 1
-AT Gun 76.2mm ,            37, Russia ATB, 1
-Heavy Tank KV1a,           77, Russia ATB, 2
-Med Tank T-34a,            80, Russia ATB, 4
-Med Tank T-34b,            89, Russia ATB, 2
-Zis 30 mobile art,         40, Russia ATB, 4
-T-38 Amphib,   			   25, Russia ATB, 2
-BA-6,            		   26, Russia ATB, 2
-BT-5,           		   33, Russia ATB, 3
-T-28A,         			   34, Russia ATB, 2
-T-26,           		   34, Russia ATB, 3
+Rifles,                     16, Russia ATB, 12
+MMG Maxim,                  18, Russia ATB, 3
+NKVD,     				    18, Russia ATB, 3
+SMG/Rifles,     		    20, Russia ATB, 4
+INF 76MM,                   24, Russia ATB, 1
+AT Gun 45mm,    		    26, Russia ATB, 2
+AT Gun 76 f22 ,             29, Russia ATB, 1
+5cm Mortar,                 24, Russia ATB, 2
+82mm Mortar,                32, Russia ATB, 2
+OT-26,                      27, Russia ATB, 1
+Armored Car BA-10,          38, Russia ATB, 2
+Light Tank BT-7,            48, Russia ATB, 2
+Light Tank T-26b,           42, Russia ATB, 4
+Tank T-35,                  46, Russia ATB, 1
+tank KV2,          		    86, Russia ATB, 1
+Heavy Tank KV1a,           94, Russia ATB, 2
+Med Tank T-34a,            81, Russia ATB, 4
+Med Tank T-34b,            86, Russia ATB, 2
+Zis 30 mobile art,         36, Russia ATB, 1
+T -38 					   24, Russia ATB, 2
+BA-6,            		   35, Russia ATB, 2
+Tank BT-5,           	   44, Russia ATB, 3
+T-28A,         			   38, Russia ATB, 2
+T-26b,           		   42, Russia ATB, 4
 Rifles,                    16, Germany ATB, 8
 Rifles+mg,                 18, Germany ATB, 4
 Tank Hunter,               10, Germany ATB, 1
-LMG 34,                    26, Germany ATB, 7
+LMG 34-drum,                    21, Germany ATB, 6
+LMG 34-belt,                    26, Germany ATB, 7
 HMG 34,                    30, Germany ATB, 2
 Pioneers,                  26, Germany ATB, 3
 5cm Mortar,                34, Germany ATB, 2
 8cm Mortar,                34, Germany ATB, 2
 Infantry Gun 7.5cm,        26, Germany ATB, 2
 Anti-Tank Gun 37mm PaK36,  23, Germany ATB, 2
-Anti-Tank Gun 50mm PaK38,     33, Germany ATB, 2
-Anti-Tank Gun 7.62cm FK 297,  31, Germany ATB, 1
+Anti-Tank Gun 50mm PaK38,  33, Germany ATB, 2
+AT Gun 7.62cm FK 297,      31, Germany ATB, 1
 Anti-Air Gun Flak18 88mm,  68, Germany ATB, 1
 Protze PaK36,              30, Germany ATB, 1
 DEMAG D7,                  40, Germany ATB, 1
@@ -50,8 +51,6 @@ PzIVf2,                    106, Germany ATB, 1
 B2(f) Tank, 			   82,  Germany ATB, 1	
 S35(f) Somua Tank, 		   72,  Germany ATB, 1	
 T-34 Captured Tank ,       90,  Germany ATB, 1
-IeIG 18,         37, Germany ATB, 2
-Hs 123,         163, Germany ATB, 1
 SdKfz 231,       43, Germany ATB, 1
 Pz 35t,          44, Germany ATB, 2
 Pz IB,           38, Germany ATB, 4
