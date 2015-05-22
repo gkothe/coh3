@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -43,14 +45,31 @@ public class MainFrame
   private JCheckBox chckbxRussiaSos;
   private JCheckBox chckbxRussiaPoh;
   private JCheckBox chckbxPolandPoh;
+  private  JCheckBox chckbxRandomDefender;
+  private   JCheckBox chckbxWeakerDefender; 
   public JButton generateButton = new JButton("Generate");
   private JTable table;
   private JScrollPane scrollPane;
+  private JCheckBox chckbxSoftTargets;
   
   public static void main(String[] args)
   {
     EventQueue.invokeLater(new MainFrame$1());
   }
+  
+  
+	public static int randInt(int min, int max) {
+
+	    // NOTE: Usually this should be a field rather than a method
+	    // variable so that it is not re-seeded every call.
+	    Random rand = new Random();
+
+	    // nextInt is normally exclusive of the top value,
+	    // so add 1 to make it inclusive
+	    int randomNum = rand.nextInt((max - min) + 1) + min;
+
+	    return randomNum;
+	}	
   
   public void showOutput()
   {
@@ -63,6 +82,9 @@ public class MainFrame
     boolean russiaPoh = false;
     boolean germanyPoh = false;
     boolean polandPoh = false;
+    boolean randomdefense = false;
+    boolean weakerdefense = false;
+    boolean softtargets = false;
     
     int pointsMax = Integer.valueOf(this.pointsTextField.getText()).intValue();
     if (this.chckbxRussiaAtb.isSelected()) {
@@ -86,9 +108,27 @@ public class MainFrame
     if (this.chckbxPolandPoh.isSelected()) {
       polandPoh = true;
     }
+    
+    if (this.chckbxRandomDefender.isSelected()) {
+    	randomdefense = true;
+      }
+ 
+    
+    boolean defenderrussia =false; 
+    boolean defendergermany = false;
+    if(randomdefense){
+	    int defense =    randInt(1, 2);
+	    if(defense == 1 ){
+	    	defenderrussia = true ;
+	    }else if(defense == 2 ){
+	    	defendergermany = true;
+	    }
+    }
     if (russiaAtb)
     {
-      HashMap<String, Integer> unitsRussiaAtb = this.main.getRandomUnits("Russia ATB", pointsMax);
+    	
+    	HashMap<String, Integer> unitsRussiaAtb = this.main.getRandomUnits("Russia ATB", pointsMax,defenderrussia);
+      
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Russia ATB:");
       for (String name : unitsRussiaAtb.keySet()) {
         this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n" + "(x" + unitsRussiaAtb.get(name) + ") " + name);
@@ -97,14 +137,14 @@ public class MainFrame
     }
     if (germanyAtb)
     {
-      HashMap<String, Integer> unitsGermanyAtb = this.main.getRandomUnits("Germany ATB", pointsMax);
+      HashMap<String, Integer> unitsGermanyAtb = this.main.getRandomUnits("Germany ATB", pointsMax,defendergermany);
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Germany ATB:");
       for (String name : unitsGermanyAtb.keySet()) {
         this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n" + "(x" + unitsGermanyAtb.get(name) + ") " + name);
       }
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n\n");
     }
-    if (russiaSos)
+  /*  if (russiaSos)
     {
       HashMap<String, Integer> unitsRussiaSos = this.main.getRandomUnits("Russia SOS", pointsMax);
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "Russia SOS:");
@@ -148,7 +188,7 @@ public class MainFrame
         this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n" + "(x" + unitsPolandPoh.get(name) + ") " + name);
       }
       this.generatorTextArea.setText(this.generatorTextArea.getText() + "\n\n");
-    }
+    }*/
     this.generatorTextArea.setCaretPosition(0);
   }
   
@@ -156,7 +196,7 @@ public class MainFrame
   {
     setTitle("COH Random Scenario Generator");
     setDefaultCloseOperation(3);
-    setBounds(100, 100, 452, 479);
+    setBounds(100, 100, 763, 554);
     this.contentPane = new JPanel();
     this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(this.contentPane);
@@ -185,22 +225,27 @@ public class MainFrame
     generatorScrollPane.setViewportView(this.generatorTextArea);
     
     this.chckbxGermanySos = new JCheckBox("Germany SOS");
+    chckbxGermanySos.setEnabled(false);
     
     this.chckbxGermanyPoh = new JCheckBox("Germany POH");
+    chckbxGermanyPoh.setEnabled(false);
     
     this.chckbxRussiaAtb = new JCheckBox("Russia ATB");
     this.chckbxRussiaAtb.setSelected(true);
     
     this.chckbxRussiaSos = new JCheckBox("Russia SOS");
+    chckbxRussiaSos.setEnabled(false);
     
     this.chckbxRussiaPoh = new JCheckBox("Russia POH");
+    chckbxRussiaPoh.setEnabled(false);
     
     this.chckbxPolandPoh = new JCheckBox("Poland POH");
+    chckbxPolandPoh.setEnabled(false);
     
     JLabel lblPoints = new JLabel("Points:");
     
     this.pointsTextField = new JTextField();
-    this.pointsTextField.setText("750");
+    this.pointsTextField.setText("500");
     this.pointsTextField.setColumns(10);
     
     JButton generateButton = new JButton("Generate");
@@ -232,55 +277,73 @@ public class MainFrame
 
 
     this.progressBar = new JProgressBar();
+    
+    chckbxRandomDefender = new JCheckBox("Random Defender");
+    
+    
+    chckbxWeakerDefender = new JCheckBox("Weaker Defender");
+    
+    chckbxSoftTargets = new JCheckBox("Soft Targets");
     GroupLayout gl_generatorPanel = new GroupLayout(generatorPanel);
     gl_generatorPanel.setHorizontalGroup(
-      gl_generatorPanel.createParallelGroup(GroupLayout.Alignment.LEADING)
-      .addGroup(gl_generatorPanel.createSequentialGroup()
-      .addContainerGap()
-      .addGroup(gl_generatorPanel.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-      .addComponent(this.chckbxGermanyAtb)
-      .addComponent(this.chckbxGermanySos)
-      .addComponent(this.chckbxRussiaAtb)
-      .addComponent(this.chckbxRussiaSos)
-      .addComponent(this.chckbxRussiaPoh)
-      .addComponent(this.chckbxGermanyPoh, -1, -1, 32767)
-      .addGroup(gl_generatorPanel.createSequentialGroup()
-      .addComponent(lblPoints)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-      .addComponent(this.pointsTextField, 0, 0, 32767))
-      .addComponent(this.chckbxPolandPoh)
-      .addComponent(generateButton)
-      .addComponent(this.progressBar, 0, 0, 32767))
-      .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-      .addComponent(generatorScrollPane, -1, 308, 32767)));
-    
+    	gl_generatorPanel.createParallelGroup(Alignment.LEADING)
+    		.addGroup(gl_generatorPanel.createSequentialGroup()
+    			.addContainerGap()
+    			.addGroup(gl_generatorPanel.createParallelGroup(Alignment.LEADING)
+    				.addGroup(gl_generatorPanel.createParallelGroup(Alignment.LEADING, false)
+    					.addComponent(chckbxGermanyAtb)
+    					.addComponent(chckbxGermanySos)
+    					.addComponent(chckbxRussiaAtb)
+    					.addComponent(chckbxRussiaPoh)
+    					.addComponent(chckbxGermanyPoh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    					.addGroup(gl_generatorPanel.createSequentialGroup()
+    						.addComponent(lblPoints)
+    						.addPreferredGap(ComponentPlacement.UNRELATED)
+    						.addComponent(pointsTextField, 0, 0, Short.MAX_VALUE))
+    					.addComponent(chckbxPolandPoh)
+    					.addComponent(progressBar, 0, 0, Short.MAX_VALUE)
+    					.addComponent(chckbxRussiaSos, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
+    				.addComponent(generateButton)
+    				.addComponent(chckbxRandomDefender, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
+    				.addComponent(chckbxWeakerDefender, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
+    				.addComponent(chckbxSoftTargets, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
+    			.addPreferredGap(ComponentPlacement.UNRELATED)
+    			.addComponent(generatorScrollPane, GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
+    );
     gl_generatorPanel.setVerticalGroup(
-      gl_generatorPanel.createParallelGroup(GroupLayout.Alignment.LEADING)
-      .addGroup(gl_generatorPanel.createSequentialGroup()
-      .addContainerGap()
-      .addComponent(this.chckbxGermanyAtb)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(this.chckbxGermanySos)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(this.chckbxGermanyPoh)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(this.chckbxRussiaAtb)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(this.chckbxRussiaSos)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(this.chckbxRussiaPoh)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(this.chckbxPolandPoh)
-      .addGap(79)
-      .addGroup(gl_generatorPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
-      .addComponent(lblPoints)
-      .addComponent(this.pointsTextField, -2, -1, -2))
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-      .addComponent(generateButton)
-      .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 82, 32767)
-      .addComponent(this.progressBar, -2, -1, -2)
-      .addContainerGap())
-      .addComponent(generatorScrollPane, -1, 403, 32767));
+    	gl_generatorPanel.createParallelGroup(Alignment.LEADING)
+    		.addGroup(gl_generatorPanel.createSequentialGroup()
+    			.addContainerGap()
+    			.addComponent(chckbxGermanyAtb)
+    			.addPreferredGap(ComponentPlacement.RELATED)
+    			.addComponent(chckbxGermanySos)
+    			.addPreferredGap(ComponentPlacement.RELATED)
+    			.addComponent(chckbxGermanyPoh)
+    			.addPreferredGap(ComponentPlacement.RELATED)
+    			.addComponent(chckbxRussiaAtb)
+    			.addPreferredGap(ComponentPlacement.RELATED)
+    			.addComponent(chckbxRussiaSos)
+    			.addPreferredGap(ComponentPlacement.RELATED)
+    			.addComponent(chckbxRussiaPoh)
+    			.addPreferredGap(ComponentPlacement.RELATED)
+    			.addComponent(chckbxPolandPoh)
+    			.addGap(79)
+    			.addGroup(gl_generatorPanel.createParallelGroup(Alignment.BASELINE)
+    				.addComponent(lblPoints)
+    				.addComponent(pointsTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+    			.addPreferredGap(ComponentPlacement.UNRELATED)
+    			.addComponent(chckbxRandomDefender)
+    			.addPreferredGap(ComponentPlacement.UNRELATED)
+    			.addComponent(chckbxWeakerDefender)
+    			.addPreferredGap(ComponentPlacement.UNRELATED)
+    			.addComponent(chckbxSoftTargets)
+    			.addPreferredGap(ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+    			.addComponent(generateButton)
+    			.addGap(18)
+    			.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    			.addContainerGap())
+    		.addComponent(generatorScrollPane, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+    );
     
     generatorPanel.setLayout(gl_generatorPanel);
     
@@ -289,7 +352,7 @@ public class MainFrame
     this.contentPane.setLayout(gl_contentPane);
     
     this.main = new Main();
-    this.main.init();
+    this.main.init(false);
     
     TableModel tableModel = new MainFrame$3(this, this.main.getMasterListCount() + 20, 2);
     
@@ -397,7 +460,7 @@ public void actionPerformed(ActionEvent e) {
 	JButton evento = (JButton)e.getSource();
 	 if(evento.getText().equals(generateButton.getText())){
 		 generatorTextArea.setText("");
-		 this.main.init();
+		 this.main.init(this.chckbxSoftTargets.isSelected());
 		 
 		 showOutput();
 	 }

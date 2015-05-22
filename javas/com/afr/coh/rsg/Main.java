@@ -16,14 +16,21 @@ public class Main {
 	private List<Unit> units = new ArrayList();
 	private List<Unit> masterList = new ArrayList();
 
-	public void init() {
+	public void init(boolean soft) {
 		this.units.clear();
 		this.masterList.clear();
 		BufferedReader br = null;
 		try {
 			URL u = getClass().getProtectionDomain().getCodeSource().getLocation();
 		    File f = new File(u.toURI());
-			InputStream is = new FileInputStream(f.getParent()+"/data.txt"); 
+		    String data = "/data.txt";
+		    if(soft){
+		    	 data = "/soft.txt";
+		    }else{
+		    	 data = "/data.txt";
+		    }
+		    
+			InputStream is = new FileInputStream(f.getParent()+data); 
 			InputStreamReader isr = new InputStreamReader(is);
 			br = new BufferedReader(isr);
 			int numberAvailable = 10;
@@ -79,7 +86,7 @@ public class Main {
 	}	
 	
 	public HashMap<String, Integer> getRandomUnits(String nationality,
-			int pointsMax) {
+			int pointsMax, boolean defender) {
 		int pointCount = 0;
 		HashMap<String, Integer> randomUnits = new HashMap();
 		
